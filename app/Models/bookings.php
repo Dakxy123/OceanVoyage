@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class bookings extends Model
+{
+    protected $table = 'bookings';
+
+    protected $fillable = [
+        'name',
+        'cruise_id',
+        'cabin_id',
+        'user_id',
+        'booking_date',
+        'status',
+        'total_cost',
+        'payment_status'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function cruise()
+    {
+        return $this->belongsTo(cruises::class, 'cruise_id');
+    }
+
+    public function cabin()
+    {
+        return $this->belongsTo(cabins::class, 'cabin_id');
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(payments::class, 'booking_id');
+    }
+}
