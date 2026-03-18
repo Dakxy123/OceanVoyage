@@ -18,4 +18,16 @@ class cabins extends Model
         'discription',
         'image_url'
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(bookings::class, 'cabin_id');
+    }
+
+    public function ship()
+    {
+        return $this->belongsTo(ships::class, 'ship_id');
+    }
+
+    
 }

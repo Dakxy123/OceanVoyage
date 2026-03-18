@@ -13,6 +13,7 @@ return new class extends Migration
     {
         schema::create('cabins', function(Blueprint $table){
             $table->id();
+            $table->string('name');
             $table->foreignId('ship_id')->constrained()->onDelete('cascade');
             $table->enum('cabin_type',['single','double','suite']);
             $table->enum('cabin_categories',['ocean view','balcony','interior']);

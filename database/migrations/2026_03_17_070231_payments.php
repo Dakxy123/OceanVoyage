@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('payment_method')->default('cash_on_hand');
             $table->enum('payment_status',['successful','failed','pending'])->default('pending');
             $table->date('payment_date');
-            $table->string('transactio0n_id')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->timestamps();
         });
     }
