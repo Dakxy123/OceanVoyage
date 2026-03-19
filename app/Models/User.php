@@ -24,12 +24,27 @@ class User extends Authenticatable
         'last_name',
         'email',
         'phone_number',
-        'password',
+        'password'
     ];
 
     public function bookings()
     {
         return $this->hasMany(bookings::class, 'user_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(notifications::class, 'user_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(reviews::class, 'user_id');
+    }
+
+    public function bookingLogs()
+    {
+        return $this->hasMany(booking_logs::class, 'user_id');
     }
     /**
      * The attributes that should be hidden for serialization.

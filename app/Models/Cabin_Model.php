@@ -9,14 +9,11 @@ class cabins extends Model
    protected $table = 'cabins';
 
     protected $fillable = [
-        'cabin_id',
-        'cabin_type',
-        'cabin_categories',
-        'floors',
-        'prices',
-        'max_occupancy',
-        'discription',
-        'image_url'
+        'ship_id',
+        'cabin_type_id',
+        'cbin_number',
+        'deck',
+        'is_available'
     ];
 
     public function bookings()
@@ -27,6 +24,11 @@ class cabins extends Model
     public function ship()
     {
         return $this->belongsTo(ships::class, 'ship_id');
+    }
+
+    public function cabinType()
+    {
+        return $this->belongsTo(cabinType::class, 'cabin_type_id');
     }
 
     

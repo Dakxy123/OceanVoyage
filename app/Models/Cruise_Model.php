@@ -9,16 +9,15 @@ class cruises extends Model
     protected $table = 'cruises';
 
     protected $fillable = [
+        'ship_id',
+        'departure_port_id',
         'name',
+        'description',
+        'trip_type',
         'departure_date',
         'return_date',
-        'departure_time',
-        'return_time',
-        'destination_id',
-        'ship_id',
-        'duration_days',
-        'iterenary',
-        'description',
+        'duration_nights',
+        'base_price',
         'status',
         'image_url'
     ];
@@ -28,13 +27,24 @@ class cruises extends Model
         return $this->belongsTo(ships::class, 'ship_id');
     }
 
+    public function port()
+    {
+        return $this->belongsTo(ports::class, 'port_id');
+    }
+
     public function destination()
     {
-        return $this->belongsTo(destinations::class, 'destination_id');
+        return $this->HasMany(destinations::class, 'cruise_id');
     }
 
     public function bookings()
     {
         return $this->hasMany(bookings::class, 'cruise_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(reviews::class, 'cruise_id');
+    }
+    
 }

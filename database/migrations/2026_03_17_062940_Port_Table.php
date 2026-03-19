@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::create('destinations', function (Blueprint $table) {
+        schema::create('ports', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('location');
+            $table->string('name');//port of palawan, port of manila, port of cebu
+            $table->string('city');
             $table->string('country');
+            $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         schema::dropIfExist('payments');
+         schema::dropIfExist('ports');
     }
 };

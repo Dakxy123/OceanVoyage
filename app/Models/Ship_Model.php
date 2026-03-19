@@ -9,21 +9,24 @@ class ships extends Model
     protected $table = 'ships';
 
     protected $fillable = [
+        'ship_class_id',
         'name',
-        'type',
-        'capacity',
-        'crew_members',
-        'ameneties',
-        'facilities',
+        'passenger_capacity',
+        'year_built',
+        'status',
         'image_url'
     ];
 
+
+    public function shipClass()
+    {
+        return $this->belongsTo(shipClass::class, 'ship_class_id');
+    }
 
     public function cabins()
     {
         return $this->hasMany(cabins::class, 'ship_id');
     }
-
     public function cruises()
     {
         return $this->hasMany(cruises::class, 'ship_id');

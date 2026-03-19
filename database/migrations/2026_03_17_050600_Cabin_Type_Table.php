@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-       schema::create('ships', function (Blueprint $table) {
+        schema::create('cabin_types', function(Blueprint $table){
             $table->id();
-            $table->string('name');
-            $table->enum('type',['premium','standard','luxury']);//luxury,budget,adventure
-            $table->integer('capacity');
-            $table->integer('crew_members');
-            $table->text('ameneties')->nullable();
-            $table->text('facilities')->nullable();
+            $table->string('name');// e.g., "Ocean View Suite", "Balcony Suite", "Interior Room"
+            $table->text('description')->nullable();
+            $table->decimal('price_modifier', 10,2);
+            $table->integer('max_occupancy');
             $table->string('image_url')->nullable();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        schema::dropIfExists('ships');
+        schema::dropIfExist('cabin_types');
     }
 };

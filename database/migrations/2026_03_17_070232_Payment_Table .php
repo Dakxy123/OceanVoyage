@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('booking_id')->constrained()->onDelete('cascade');
+            $table->foreignId('payment_method_id')->constrained('payment_methods')->onDelete('cascade');
             $table->decimal('amount', 10,2);
-            $table->string('payment_method')->default('cash_on_hand');
-            $table->enum('payment_status',['successful','failed','pending'])->default('pending');
-            $table->date('payment_date');
-            $table->string('transaction_id')->nullable();
+            $table->string('currency', 3)->default('PHP');
+            $table->enum('payment_status',['successful','failed','pending', 'refunded'])->default('pending');
+            $table->string('transaction_ref')->nullable();
+            $table->timestamp('paid_at')->useCurrent()->nullable();
             $table->timestamps();
         });
     }

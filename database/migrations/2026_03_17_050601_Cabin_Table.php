@@ -13,17 +13,12 @@ return new class extends Migration
     {
         schema::create('cabins', function(Blueprint $table){
             $table->id();
-            $table->string('name');
-            $table->foreignId('ship_id')->constrained()->onDelete('cascade');
-            $table->enum('cabin_type',['single','double','suite']);
-            $table->enum('cabin_categories',['ocean view','balcony','interior']);
-            $table->integer('floors');
-            $table->decimal('prices', 10,2);
-            $table->integer('max_occupancy');
-            $table->text('description')->nullable();
-            $table->string('image_url')->nullable();
+            $table->foreignId('ship_id')->constrained('ships')->onDelete('cascade');
+            $table->foreignId('cabin_type_id')->constrained('cabin_types')->onDelete('cascade');
+            $table->string('cabin_number');//"D-101", "B-202", "S-303"
+            $table->integer('deck');//deck number where the cabin is located e.g., 1, 2, 3
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
-
         });
     }
 

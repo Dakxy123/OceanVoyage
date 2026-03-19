@@ -13,17 +13,17 @@ return new class extends Migration
     {
         schema::create('cruises', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ship_id')->constrained('ships')->onDelete('cascade');
+            $table->foreignId('departure_port_id')->constrained('ports')->onDelete('cascade');
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->enum('trip_type', ['round_trip', 'one_way', 'repositioning', 'loop'])->default('round_trip');
             $table->date('departure_date');
             $table->date('return_date');
-            $table->time('departure_time');
-            $table->time('return_time');
-            $table->foreignId('destination_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ship_id')->constrained()->onDelete('cascade');
-            $table->integer('duration_days');
-            $table->text('iterenary')->nullable();
-            $table->text('description')->nullable();
-            $table->enum('status',['upcoming','ongoing','completed'])->default('upcoming');
+            $table->unsignedInteger('duration_nights');
+            $table->decimal('base_price', 10, 2);
+            $table->enum('status', ['scheduled', 'boarding','sailing' , 'completed', 'cancelled'])->default('scheduled');
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

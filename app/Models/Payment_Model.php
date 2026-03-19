@@ -11,16 +11,20 @@ class payments extends Model
     protected $fillable = [
         'name',
         'booking_id',
+        'payment_method_id',
         'amount',
-        'payment_method',
-        'payment_status',
-        'payment_date',
-        'transaction_id',
-        'status'
+        'currency',
+        'transation_ref',
+        'paid_at'
     ];
 
     public function booking()
     {
         return $this->belongsTo(bookings::class, 'booking_id');
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(paymentMethod::class, 'payment_method_id');
     }
 }
